@@ -10,4 +10,3 @@ uses: actions/fibbot@v1
 
 ## Parameter parsing
 This action equally receives and processes inputs from the Github worflow.
-
