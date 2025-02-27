@@ -17,10 +17,7 @@ outputs:
 runs:
   using: "docker"
   image: "Dockerfile"
-  args:
-    - "${{ inputs.enable_fib }}"
-    - "${{ inputs.max_threshold }}"
   entrypoint: "/bin/sh"
   args:
     - "-c"
-    - "./fibbot | tee /github/workspace/output.txt"
+    - "./fibbot ${{ inputs.enable_fib }} ${{ inputs.max_threshold }} | tee /github/workspace/output.txt"
