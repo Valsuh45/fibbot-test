@@ -18,6 +18,7 @@ runs:
   using: "docker"
   image: "Dockerfile"
   args:
+    - "sh"
     - "-c"
     - |
       echo "Running Rust program..."
@@ -31,4 +32,3 @@ runs:
 
       echo "Final verification inside container:"
       ls -lah /github/workspace/
-
