@@ -8,11 +8,11 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Run Fibbot
-        id: input-parse
+        id: fibbot
         uses: ./
         with:
           enable_fib: "false"
           max_threshold: "1000"
 
-      - name: display output
-        run: echo "The inputs are ${{ inputs.enable_fib }} and ${{ inputs.max_threshold }}"
+      - name: Display captured output
+        run: echo "The inputs are ${{ steps.fibbot.outputs.enable_fib }} and ${{ steps.fibbot.outputs.max_threshold }}"
