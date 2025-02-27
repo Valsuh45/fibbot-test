@@ -20,7 +20,7 @@ runs:
   args:
     - "${{ inputs.enable_fib }}"
     - "${{ inputs.max_threshold }}"
-  env:
-    OUTPUT_PATH: "/github/workspace/output.txt"
   entrypoint: "/bin/sh"
-  command: ["-c", "./fibbot > $OUTPUT_PATH && cat $OUTPUT_PATH"]
+  args:
+    - "-c"
+    - "./fibbot | tee /github/workspace/output.txt"
