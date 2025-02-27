@@ -20,4 +20,9 @@ runs:
   entrypoint: "/bin/sh"
   args:
     - "-c"
-    - "/app/target/release/fibbot ${{ inputs.enable_fib }} ${{ inputs.max_threshold }} && cp /output.txt /github/workspace/output.txt"
+    - |
+      ls -lah /        # ✅ List root directory contents (before running)
+      /app/target/release/fibbot ${{ inputs.enable_fib }} ${{ inputs.max_threshold }}
+      ls -lah /        # ✅ Check if /output.txt exists
+      cp /output.txt /github/workspace/output.txt
+      ls -lah /github/workspace  # ✅ Verify output.txt was moved
