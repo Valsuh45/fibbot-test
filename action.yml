@@ -1,20 +1,26 @@
 name: "My fibbot"
-description: "A rust program that prints Hello world and handles parameters"
+description: "A Rust program that prints Hello world and handles parameters"
 inputs:
   enable_fib:
-    description: "Enabling fibonnaci"
+    description: "Enabling Fibonacci"
     required: true
     default: "false"
   max_threshold:
-    description: "The maximum nuber of fibbonacci that will be done"
+    description: "The maximum number of Fibonacci calculations"
     required: true
     default: "500"
 outputs:
-  input-parse:
-    description: "Output printed to logs"
+  enable_fib:
+    description: "Captured enable_fib value"
+  max_threshold:
+    description: "Captured max_threshold value"
 runs:
   using: "docker"
   image: "Dockerfile"
   args:
     - "${{ inputs.enable_fib }}"
     - "${{ inputs.max_threshold }}"
+  env:
+    OUTPUT_PATH: "/github/workspace/output.txt"
+  entrypoint: "/bin/sh"
+  command: ["-c", "./fibbot > $OUTPUT_PATH && cat $OUTPUT_PATH"]
