@@ -21,8 +21,14 @@ runs:
   args:
     - "-c"
     - |
-      ls -lah /        # ✅ List root directory contents (before running)
+      echo "Running Rust program..."
       /app/target/release/fibbot ${{ inputs.enable_fib }} ${{ inputs.max_threshold }}
-      ls -lah /        # ✅ Check if /output.txt exists
-      cp /output.txt /github/workspace/output.txt
-      ls -lah /github/workspace  # ✅ Verify output.txt was moved
+      
+      echo "Listing contents before moving output.txt..."
+      ls -lah /
+      
+      echo "Moving output.txt to /github/workspace/..."
+      mv /output.txt /github/workspace/output.txt || { echo "Failed to move output.txt"; exit 1; }
+      
+      echo "Listing contents after moving output.txt..."
+      ls -lah /github/workspace
