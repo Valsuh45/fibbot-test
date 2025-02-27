@@ -4,7 +4,7 @@ use std::io::{Write, BufWriter};
 
 fn main() {
     let args: Vec<String> = env::args().collect();
-    let output_path = "/github/workspace/output.txt";
+    let output_path = "/output.txt"; // Change from /github/workspace/output.txt
     let file = File::create(output_path).expect("Failed to create output file");
     let mut writer = BufWriter::new(file);
 

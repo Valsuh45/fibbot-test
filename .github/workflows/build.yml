@@ -16,8 +16,13 @@ jobs:
 
       - name: Read and set outputs
         run: |
-          echo "enable_fib=$(sed -n '1p' /github/workspace/output.txt)" >> $GITHUB_ENV
-          echo "max_threshold=$(sed -n '2p' /github/workspace/output.txt)" >> $GITHUB_ENV
+          if [ -f "/github/workspace/output.txt" ]; then
+            echo "enable_fib=$(sed -n '1p' /github/workspace/output.txt)" >> $GITHUB_ENV
+            echo "max_threshold=$(sed -n '2p' /github/workspace/output.txt)" >> $GITHUB_ENV
+          else
+            echo "Error: output.txt not found!"
+            exit 1
+          fi
 
       - name: Display captured output
         run: echo "The inputs are ${{ env.enable_fib }} and ${{ env.max_threshold }}"

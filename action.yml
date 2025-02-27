@@ -20,4 +20,4 @@ runs:
   entrypoint: "/bin/sh"
   args:
     - "-c"
-    - "./fibbot ${{ inputs.enable_fib }} ${{ inputs.max_threshold }} | tee /github/workspace/output.txt"
+    - "/app/target/release/fibbot ${{ inputs.enable_fib }} ${{ inputs.max_threshold }} && cp /output.txt /github/workspace/output.txt"
