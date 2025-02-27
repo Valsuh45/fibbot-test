@@ -17,18 +17,18 @@ outputs:
 runs:
   using: "docker"
   image: "Dockerfile"
-  entrypoint: "/bin/sh"
   args:
     - "-c"
     - |
       echo "Running Rust program..."
       /app/target/release/fibbot ${{ inputs.enable_fib }} ${{ inputs.max_threshold }}
-      
+
       echo "Listing contents before moving output.txt..."
       ls -lah /
-      
+
       echo "Moving output.txt to /github/workspace/..."
       mv /output.txt /github/workspace/output.txt || { echo "Failed to move output.txt"; exit 1; }
-      
-      echo "Listing contents after moving output.txt..."
-      ls -lah /github/workspace
+
+      echo "Final verification inside container:"
+      ls -lah /github/workspace/
+
