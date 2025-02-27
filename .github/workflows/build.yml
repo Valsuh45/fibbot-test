@@ -14,5 +14,10 @@ jobs:
           enable_fib: "false"
           max_threshold: "1000"
 
+      - name: Read and set outputs
+        run: |
+          echo "enable_fib=$(sed -n '1p' /github/workspace/output.txt)" >> $GITHUB_ENV
+          echo "max_threshold=$(sed -n '2p' /github/workspace/output.txt)" >> $GITHUB_ENV
+
       - name: Display captured output
-        run: echo "The inputs are ${{ steps.fibbot.outputs.enable_fib }} and ${{ steps.fibbot.outputs.max_threshold }}"
+        run: echo "The inputs are ${{ env.enable_fib }} and ${{ env.max_threshold }}"
