@@ -2,7 +2,10 @@ FROM rust:latest
 
 WORKDIR /app
 COPY . .
+
 RUN cargo build --release
 
-ENTRYPOINT ["/app/target/release/fibbot"]
-CMD []
+# Ensure workspace is correctly mounted
+VOLUME /github/workspace
+
+CMD ["/app/target/release/fibbot"]
